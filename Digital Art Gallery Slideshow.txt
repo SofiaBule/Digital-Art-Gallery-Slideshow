@@ -1,0 +1,27 @@
+import os
+import pygame
+from pygame.locals import QUIT
+
+def slideshow(folder_path):
+    pygame.init()
+
+    screen = pygame.display.set_mode((800, 600))
+    pygame.display.set_caption("Artwork Slideshow")
+
+    images = [f for f in os.listdir(folder_path) if f.endswith(('.png', '.jpg', '.jpeg'))]
+
+    for image in images:
+        img_path = os.path.join(folder_path, image)
+        img = pygame.image.load(img_path)
+
+        screen.blit(img, (0, 0))
+        pygame.display.flip()
+        pygame.time.wait(2000)  # Display each image for 2 seconds
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                pygame.quit()
+
+# Example usage:
+slideshow("path/to/kids_artwork_folder")
+
